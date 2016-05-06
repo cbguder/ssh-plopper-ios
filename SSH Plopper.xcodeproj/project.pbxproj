@@ -7,23 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE2B53AD1CDD2FF0000E26E8 /* KeysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2B53AB1CDD2FF0000E26E8 /* KeysViewController.swift */; };
+		AE6444181CDD3E28002A85D4 /* ComputersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6444171CDD3E28002A85D4 /* ComputersViewController.swift */; };
 		AE9660321CDCFF3A003EC212 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9660311CDCFF3A003EC212 /* AppDelegate.swift */; };
-		AE9660341CDCFF3A003EC212 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9660331CDCFF3A003EC212 /* ViewController.swift */; };
-		AE9660371CDCFF3A003EC212 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE9660351CDCFF3A003EC212 /* Main.storyboard */; };
 		AE9660391CDCFF3A003EC212 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE9660381CDCFF3A003EC212 /* Assets.xcassets */; };
 		AE96603C1CDCFF3A003EC212 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE96603A1CDCFF3A003EC212 /* LaunchScreen.storyboard */; };
-		AEF768561CDD05B300EF7936 /* Discoverer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF768551CDD05B300EF7936 /* Discoverer.swift */; };
+		AEF768751CDD1F5900EF7936 /* Valet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF768741CDD1F5900EF7936 /* Valet.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE2B53AB1CDD2FF0000E26E8 /* KeysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeysViewController.swift; sourceTree = "<group>"; };
+		AE6444101CDD3956002A85D4 /* SSH Plopper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "SSH Plopper.entitlements"; sourceTree = "<group>"; };
+		AE6444171CDD3E28002A85D4 /* ComputersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputersViewController.swift; sourceTree = "<group>"; };
 		AE96602E1CDCFF3A003EC212 /* SSH Plopper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SSH Plopper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE9660311CDCFF3A003EC212 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AE9660331CDCFF3A003EC212 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		AE9660361CDCFF3A003EC212 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AE9660381CDCFF3A003EC212 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE96603B1CDCFF3A003EC212 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE96603D1CDCFF3A003EC212 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AEF768551CDD05B300EF7936 /* Discoverer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discoverer.swift; sourceTree = "<group>"; };
+		AEF768741CDD1F5900EF7936 /* Valet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Valet.framework; path = Carthage/Build/iOS/Valet.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEF768751CDD1F5900EF7936 /* Valet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,8 +42,9 @@
 		AE9660251CDCFF3A003EC212 = {
 			isa = PBXGroup;
 			children = (
-				AE9660301CDCFF3A003EC212 /* SSH Plopper */,
+				AEF768761CDD1F6000EF7936 /* Frameworks */,
 				AE96602F1CDCFF3A003EC212 /* Products */,
+				AE9660301CDCFF3A003EC212 /* SSH Plopper */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,14 +60,22 @@
 			isa = PBXGroup;
 			children = (
 				AE9660311CDCFF3A003EC212 /* AppDelegate.swift */,
-				AE9660331CDCFF3A003EC212 /* ViewController.swift */,
-				AE9660351CDCFF3A003EC212 /* Main.storyboard */,
 				AE9660381CDCFF3A003EC212 /* Assets.xcassets */,
-				AE96603A1CDCFF3A003EC212 /* LaunchScreen.storyboard */,
+				AE6444171CDD3E28002A85D4 /* ComputersViewController.swift */,
 				AE96603D1CDCFF3A003EC212 /* Info.plist */,
-				AEF768551CDD05B300EF7936 /* Discoverer.swift */,
+				AE2B53AB1CDD2FF0000E26E8 /* KeysViewController.swift */,
+				AE96603A1CDCFF3A003EC212 /* LaunchScreen.storyboard */,
+				AE6444101CDD3956002A85D4 /* SSH Plopper.entitlements */,
 			);
 			path = "SSH Plopper";
+			sourceTree = "<group>";
+		};
+		AEF768761CDD1F6000EF7936 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AEF768741CDD1F5900EF7936 /* Valet.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,6 +88,7 @@
 				AE96602A1CDCFF3A003EC212 /* Sources */,
 				AE96602B1CDCFF3A003EC212 /* Frameworks */,
 				AE96602C1CDCFF3A003EC212 /* Resources */,
+				AE2B53A41CDD1F82000E26E8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -99,6 +111,12 @@
 				TargetAttributes = {
 					AE96602D1CDCFF3A003EC212 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = BVZYXK966R;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -127,19 +145,35 @@
 			files = (
 				AE96603C1CDCFF3A003EC212 /* LaunchScreen.storyboard in Resources */,
 				AE9660391CDCFF3A003EC212 /* Assets.xcassets in Resources */,
-				AE9660371CDCFF3A003EC212 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AE2B53A41CDD1F82000E26E8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Valet.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AE96602A1CDCFF3A003EC212 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEF768561CDD05B300EF7936 /* Discoverer.swift in Sources */,
-				AE9660341CDCFF3A003EC212 /* ViewController.swift in Sources */,
+				AE2B53AD1CDD2FF0000E26E8 /* KeysViewController.swift in Sources */,
+				AE6444181CDD3E28002A85D4 /* ComputersViewController.swift in Sources */,
 				AE9660321CDCFF3A003EC212 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,14 +181,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		AE9660351CDCFF3A003EC212 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AE9660361CDCFF3A003EC212 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		AE96603A1CDCFF3A003EC212 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -253,10 +279,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "SSH Plopper/SSH Plopper.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "SSH Plopper/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.pivotal.SSH-Plopper";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.pivotal.SSH-Plopper-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -264,10 +298,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "SSH Plopper/SSH Plopper.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "SSH Plopper/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.pivotal.SSH-Plopper";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.pivotal.SSH-Plopper-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
