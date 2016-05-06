@@ -9,19 +9,21 @@ class ComputersViewController: UITableViewController {
     let valet: VALSecureEnclaveValet
     let keyId: String
     var peerIds: NSMutableOrderedSet
+    var transmittingPeerIds: Set<MCPeerID>
 
     init(keyId: String) {
         self.keyId = keyId
 
         let device = UIDevice.currentDevice()
-        let peerId = MCPeerID(displayName: device.name)
+        let myPeerId = MCPeerID(displayName: device.name)
         let serviceType = "ssh-key-service"
 
         peerIds = NSMutableOrderedSet()
+        transmittingPeerIds = Set<MCPeerID>()
 
-        browser = MCNearbyServiceBrowser(peer: peerId, serviceType: serviceType)
+        browser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
 
-        session = MCSession(peer: peerId, securityIdentity: nil, encryptionPreference: .Required)
+        session = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .Required)
 
         valet = VALSecureEnclaveValet(identifier: "plopper", accessControl: .UserPresence)!
 
@@ -45,6 +47,38 @@ class ComputersViewController: UITableViewController {
         browser.startBrowsingForPeers()
     }
 
+    func displayConfirmationCode(confirmationCode: String, peerId: MCPeerID) {
+        let alertController = UIAlertController(title: "Confirm Code", message: confirmationCode, preferredStyle: .Alert)
+
+        let confirmAction = UIAlertAction(title: "Confirm", style: .Default) { action in
+            if let data = self.valet.objectForKey(self.keyId, userPrompt: "Gimme Yo SSH Key") {
+                do {
+                    try self.session.sendData(data, toPeers: [peerId], withMode: .Reliable)
+                } catch let error {
+                    print("Failed to send", error)
+                }
+            }
+
+            self.cleanupForPeerId(peerId)
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action in
+            self.cleanupForPeerId(peerId)
+        }
+
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+
+    func cleanupForPeerId(peerId: MCPeerID) {
+        transmittingPeerIds.remove(peerId)
+
+        let indexPath = NSIndexPath(forRow: peerIds.indexOfObject(peerId), inSection: 0)
+        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+    }
+
 }
 
 extension ComputersViewController {
@@ -57,7 +91,17 @@ extension ComputersViewController {
         let peerId = peerIds[indexPath.row] as! MCPeerID
 
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell")!
-        cell.accessoryType = .DisclosureIndicator
+
+        if transmittingPeerIds.contains(peerId) {
+            let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+            activityIndicatorView.startAnimating()
+            cell.accessoryView = activityIndicatorView
+            cell.accessoryType = .None
+        } else {
+            cell.accessoryView = nil
+            cell.accessoryType = .DisclosureIndicator
+        }
+
         cell.textLabel!.text = peerId.displayName
         return cell
     }
@@ -68,6 +112,9 @@ extension ComputersViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let peerId = peerIds[indexPath.row] as! MCPeerID
+
+        transmittingPeerIds.insert(peerId)
+        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
 
         browser.invitePeer(peerId, toSession: session, withContext: nil, timeout: 0)
     }
@@ -88,18 +135,17 @@ extension ComputersViewController: MCNearbyServiceBrowserDelegate {
 
 extension ComputersViewController: MCSessionDelegate {
     func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {
-        if state == .Connected {
-            let data = valet.objectForKey(keyId, userPrompt: "Gimme Yo SSH Key")!
-
-            do {
-                try session.sendData(data, toPeers: [peerID], withMode: .Reliable)
-            } catch let error {
-                print("Failed to send", error)
-            }
-        }
+        print("Peer changed state", peerID, state.rawValue)
     }
 
     func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
+        if let str = String(data: data, encoding: NSUTF8StringEncoding) {
+            dispatch_async(dispatch_get_main_queue()) {
+                self.displayConfirmationCode(str, peerId: peerID)
+            }
+        } else {
+            print("Unable to decode confirmation code")
+        }
     }
 
     func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
